@@ -12,9 +12,9 @@ The dataset must contain the images and annotations in yolo format
 Create new .yaml file inside src/data following the example:
 
 ```
-train: ./data/images/train/ 
-val:  ./data/images/val/
-test: ./data/images/test/
+train: ../data/images/train/ 
+val:  ../data/images/val/
+test: ../data/images/test/
 
 # number of classes
 nc: 1
@@ -27,10 +27,18 @@ The realted yolov5(network size).yaml needs to be adapted to the number os class
 
 To train:
 ```bash
-python train.py --img 640 --cfg yolov5s.yaml --hyp hyp.scratch.yaml --batch 32 --epochs 100 --data road_sign_data.yaml --weights yolov5s.pt --workers 24 --name yolo_road_det
+python train.py --img 640 --cfg yolov5s.yaml --hyp hyp.scratch.yaml --batch 16 --epochs 100 --data wheat_train.yaml --weights yolov5s.pt --workers 4 --name wheat_custom --device 0
 ```
 
+For inference: ( Check the save_txt flag on inference )
+```bash
+python detect.py --source ../data/images/test/ --weights runs/train/wheat_custom/weights/best.pt --conf 0.50 --save-txt --save-conf --name wheat_custom
+```
 
+For metrics on test set:
+```bash
+python test.py --weights runs/train/wheat_custom/weights/best.pt --data wheat_train.yaml --task test --name wheat_custom
+```
 
 
 
