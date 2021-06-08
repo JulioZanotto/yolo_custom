@@ -8,8 +8,7 @@ __pycache__/
 
 # Folders
 data/
-src/runs/detect/
-src/runs/test/
+src/runs/
 
 # Distribution / packaging
 .Python
